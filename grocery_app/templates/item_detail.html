@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Item - {{ item.name }}</h1>
+
+<p><img src="{{ item.photo_url }}" width="250px" height="250px"></p>
+
+<p><strong>Price:</strong> {{ item.price }}</p>
+
+<p><strong>Category:</strong> {{ item.category }}</p>
+
+<p><strong>Store:</strong> {{ item.store.title }}</p>
+
+
+<h2>Edit Item</h2>
+
+<form method="POST" action="{{ url_for('main.item_detail', item_id=item.id) }}">
+    {{ form.csrf_token }}
+    <fieldset>
+        <legend>Please enter your information:</legend>
+
+        {{ form.name.label }}
+        {{ form.name }}
+
+        {% for error in form.name.errors %}
+        <li style="color: red">{{ error }}</li>
+        {% endfor %}
+
+        {{ form.price.label }}
+        {{ form.price }}
+
+        {% for error in form.price.errors %}
+        <li style="color: red">{{ error }}</li>
+        {% endfor %}
+
+        {{ form.category.label }}
+        {{ form.category }}
+
+        {% for error in form.category.errors %}
+        <li style="color: red">{{ error }}</li>
+        {% endfor %}
+
+        {{ form.photo_url.label }}
+        {{ form.photo_url }}
+
+        {% for error in form.photo_url.errors %}
+        <li style="color: red">{{ error }}</li>
+        {% endfor %}
+
+        {{ form.store.label }}
+        {{ form.store }}
+
+        {% for error in form.store.errors %}
+        <li style="color: red">{{ error }}</li>
+        {% endfor %}
+
+
+        {{ form.submit }}
+    </fieldset>
+</form>
+
+{% endblock %}
